@@ -5,7 +5,7 @@ name: fdom forecasting
 
 on:
   schedule:
-    - cron: '0 */2 * * *'
+    - cron: '49 */2 * * *'
 
   push:
     branches: [ "main" ]
