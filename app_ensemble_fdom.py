@@ -1,6 +1,6 @@
 #globals().clear()
-from flask import Flask, render_template
-from apscheduler.schedulers.background import BackgroundScheduler
+#from flask import Flask, render_template
+#from apscheduler.schedulers.background import BackgroundScheduler
 import matplotlib
 matplotlib.use('Agg')  # Use non-interactive backend for Matplotlib
 import matplotlib.pyplot as plt
@@ -13,8 +13,8 @@ from matplotlib.ticker import MultipleLocator
 from matplotlib.ticker import FuncFormatter
 from joblib import load
 
-app = Flask(__name__)
-scheduler = BackgroundScheduler()
+#app = Flask(__name__)
+#scheduler = BackgroundScheduler()
 
 lat = 41.97
 lon = 2.38
@@ -261,25 +261,25 @@ def fetch_and_plot():
 fetch_and_plot()
 
 # Schedule the fetch_and_plot function to run every hour
-scheduler.add_job(fetch_and_plot, "interval", hours=1)
-scheduler.start()
+#scheduler.add_job(fetch_and_plot, "interval", hours=1)
+#scheduler.start()
 
 # Flask route to display the plot
-@app.route("/")
-def index():
+#@app.route("/")
+#def index():
     # Update plot before rendering
-    fetch_and_plot()
-    return render_template("index.html")
+#    fetch_and_plot()
+#    return render_template("index.html")
 
 # Shutdown scheduler gracefully when app context is terminated
-@app.teardown_appcontext
-def shutdown_scheduler(exception=None):
-    try:
-        if scheduler.running:
-            scheduler.shutdown()
-    except SchedulerNotRunningError:
-        pass
+#@app.teardown_appcontext
+#def shutdown_scheduler(exception=None):
+#    try:
+#        if scheduler.running:
+#            scheduler.shutdown()
+#    except SchedulerNotRunningError:
+#        pass
 
-if __name__ == '__main__':
+#if __name__ == '__main__':
     #app.run(debug=True)
-    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 3000)), debug=True)
+    #app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 3000)), debug=True)
