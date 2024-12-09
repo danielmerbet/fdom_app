@@ -122,6 +122,8 @@ def arrange_predictions(df_soil):
     all_predictions = pd.DataFrame()
     #members = members  # Define the number of members if not passed as a parameter
     
+    loaded_rf = load("data/random_forest_fdom.joblib")
+    
     # Loop through each member (0 to 29)
     for i in range(members):
         # Fetch and select relevant data for the current member
@@ -159,7 +161,7 @@ def plot_data(df, predictions):
     now = datetime.now()  # Get the current time
     fig, axs = plt.subplots(5, 1, figsize=(10 * cm, 10 * cm), sharex=True)  # Add an additional subplot for predictions
     fig.tight_layout(pad=0.5)
-    fig.subplots_adjust(hspace=0.1)
+    #fig.subplots_adjust(hspace=0.1)
 
     # Define a function to format y-axis
     def format_y_axis(ax, step):
@@ -185,11 +187,13 @@ def plot_data(df, predictions):
     axs[0].plot(unique_dates, predictions, lw=0.5, color="red")
     axs[0].axvline(now, color="gray", linestyle="solid", lw=0.5)
     axs[0].set_ylabel("fDOM (QSU)", fontsize=label_sizes, labelpad=0)
-    axs[0].tick_params(axis='x', labelbottom=True, color="gray", width=0.3)
+    #axs[0].tick_params(axis='x', labelbottom=True, color="gray", width=0.3)
+    axs[0].tick_params(axis='x', labelbottom=True, rotation=0, labelsize=label_sizes, color="gray", width=0.3)
     axs[0].xaxis.set_major_formatter(FuncFormatter(custom_date_formatter))
     axs[0].xaxis.set_major_locator(mdates.HourLocator(byhour=[0, 12]))  # Major ticks at 00:00 and 12:00
     format_y_axis(axs[0], step=5)
     axs[0].grid(axis='y', linewidth=0.2, color='gray')
+    axs[0].set_xlabel("Time (UTC +1)", fontsize=label_sizes, labelpad=1)
 
     # Plot 2: Temperature Ensemble Members
     for member in range(members):
