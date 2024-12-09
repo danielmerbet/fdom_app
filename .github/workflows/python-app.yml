@@ -5,15 +5,7 @@ name: fdom forecasting
 
 on:
   schedule:
-    - cron: '49 */2 * * *'
-
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-
-permissions:
-  contents: read
+    - cron: '53 */2 * * *'
 
 jobs:
   build:
